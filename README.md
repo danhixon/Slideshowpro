@@ -19,20 +19,20 @@ This gem currently requires 'curl' - it calls it using back ticks. TODO: use cur
 Usage
 -----
 
-    @ssp = Slideshowpro::Director.new('http://yoururl.com/api/','your-api-key')
+    ssp = Slideshowpro::Director.new('http://yoururl.com/api/','your-api-key')
 
 Get a Gallery:
     
-    @albums = @ssp.get_gallery(gallery_id, :preview=>{:size => '123x35',:crop => 1, :quality => 90})
-    @albums.each do |album|
+    albums = ssp.get_gallery(gallery_id, :preview=>{:size => '123x35',:crop => 1, :quality => 90})
+    albums.each do |album|
       puts album['name'] 
       puts album['id']
     end
     
 Get an Album:
     
-    @album = @ssp.get_album(album_id, {:large=>{:size => '225x350', :crop => 0, :quality => 95, :sharpening => 0}})
-    @album.each do |image|
+    album = ssp.get_album(album_id, {:large=>{:size => '225x350', :crop => 0, :quality => 95, :sharpening => 0}})
+    album.each do |image|
     	puts image["large"]["url"]
     	puts image["thumb"]["url"]
     	puts image["thumb"]["width"]
