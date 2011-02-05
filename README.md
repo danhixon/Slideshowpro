@@ -32,7 +32,7 @@ Get a Gallery:
 Get an Album:
     
     album = ssp.get_album(album_id, {:large=>{:size => '225x350', :crop => 0, :quality => 95, :sharpening => 0}})
-    album.each do |image|
+      album.each do |image|
     	puts image["large"]["url"]
     	puts image["thumb"]["url"]
     	puts image["thumb"]["width"]
