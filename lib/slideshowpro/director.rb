@@ -1,4 +1,3 @@
-require 'uri'
 module Slideshowpro
   class Director
     attr_accessor :api_key, :url
