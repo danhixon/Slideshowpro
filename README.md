@@ -8,10 +8,13 @@ Installation
 
 Include in your Gemfile:
 
-    gem "slideshopro", :git =>
-      "git://github.com/danhixon/slideshowpro.git"
+    gem "slideshowpro"
+    
+Or just install it:
+  
+    gem install slideshowpro
 
-This gem currently requires 'curl' - it calls it using back ticks `curl`. TODO: use curb instead so the dependency can be declared.
+This gem currently requires 'curl' - it calls it using back ticks. TODO: use curb instead so the dependency can be declared.
 
 Usage
 -----
