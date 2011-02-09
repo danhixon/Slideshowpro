@@ -42,12 +42,12 @@ Get an Album:
 Caching
 --------
 
-This gem will cache the API responses if you define a CACHE constant in your app.  Only tested with memcachd but should work with anything that responds to 'get' and 'set' methods.
+This gem will cache the API responses if you pass in a cache object from your app.  Only tested with memcachd but should work with anything that responds to 'get' and 'set' methods.
 
 Example:
 
     require 'memcached'
-    CACHE = Memcached.new
+    @ssp.cache = Memcached.new
 
 Enjoy!
 

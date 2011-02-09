@@ -1,9 +1,10 @@
 module Slideshowpro
   class Director
-    attr_accessor :api_key, :url
-    def initialize(url, api_key, *options)
+    attr_accessor :api_key, :url, :cache
+    def initialize(url, api_key, cache=nil)
       self.url = url
       self.api_key = api_key
+      self.cache = cache
     end
     def post(method, options)
       params = {
@@ -14,14 +15,14 @@ module Slideshowpro
       params.merge!(options)
       data = URI.escape(params.map {|k,v| "#{URI.escape(k)}=#{URI.escape(v.to_s)}"}.join("&"))
     
-      if defined?(CACHE) && CACHE.respond_to?(:get)
+      if defined?(self.cache) && self.cache.respond_to?(:get)
         require 'digest/md5'
         data_key = Digest::MD5.hexdigest(method + "|" + data)
         begin
-        json=CACHE.get(data_key)
+        json=self.cache.get(data_key)
         rescue Memcached::NotFound
           json = get_json(url, method, data)
-          CACHE.set(data_key, json)
+          self.cache.set(data_key, json)
         rescue Memcached::ServerIsMarkedDead
           puts "Memcache Down!"
           #fall back to get data directly
