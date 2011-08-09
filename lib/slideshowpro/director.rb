@@ -56,7 +56,10 @@ module Slideshowpro
     end
     protected
     def get_json(url, method, data)
-      Crack::JSON.parse(`curl --silent #{url+method} --data "#{data}"`)
+			puts "requesting #{url+method} with #{data.inspect}" if $debug
+			response = `curl --silent #{url+method} --data "#{data}"`
+			puts "recieved: #{response}" if $debug
+      Crack::JSON.parse(response)
     end
   end
 end
