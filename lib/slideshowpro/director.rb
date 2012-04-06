@@ -33,11 +33,19 @@ module Slideshowpro
       end
       return json
     end
-    def get_album(album_id, formats={:thumb=>{:size=>'41x41',:quality=> 85},:large=>{:crop=>0,:size=>'750x750', :sharpening=>0}})
+     def get_album(album_id, formats={})
+      defaults = { 
+                    :thumb => { :size => '41x41', :quality => 85}, 
+                    :large => { :crop =>0, :size=> '750x750', :sharpening => 0 }, 
+                    :retina=> { :crop => 0, :size => '1500x1500', :sharpening => 0 } 
+                  }
+      formats = defaults.merge(formats)
       raw = post('get_album', format_hash(formats).merge('data[album_id]'=>album_id))
       raw["data"]["contents"]
     end
-    def get_gallery(gallery_id, formats={:preview=>{:size => '123x35',:crop => 1, :quality => 90}})
+    def get_gallery(gallery_id, formats={})
+      defaults = {:preview=>{:size => '123x35',:crop => 1, :quality => 90}}
+      formats = defaults.merge(formats)
       raw = post('get_gallery', format_hash(formats).merge('data[gallery_id]'=>gallery_id))
       raw["data"]["albums"]
     end
