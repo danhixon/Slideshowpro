@@ -36,6 +36,7 @@ module Slideshowpro
      def get_album(album_id, formats={})
       defaults = { 
                     :thumb => { :size => '41x41', :quality => 85}, 
+                    :retina_thumb => { :size => '82x82', :quality => 90}, 
                     :large => { :crop =>0, :size=> '750x750', :sharpening => 0 }, 
                     :retina=> { :crop => 0, :size => '1500x1500', :sharpening => 0 } 
                   }
@@ -67,7 +68,7 @@ module Slideshowpro
 			puts "requesting #{url+method} with #{data.inspect}" if $debug
 			response = `curl --silent #{url+method} --data "#{data}"`
 			puts "recieved: #{response}" if $debug
-      Crack::JSON.parse(response)
+      JSON.parse(response)
     end
   end
 end
