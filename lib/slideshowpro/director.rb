@@ -27,13 +27,9 @@ module Slideshowpro
 					json = get_json(url, method, data)
 					self.cache.set(data_key, json)
 				end
-				rescue Memcached::NotFound
+				rescue 
 					json = get_json(url, method, data)
-					self.cache.set(data_key, json)
-				rescue Memcached::ServerIsMarkedDead
-					puts "Memcache Down!"
-					#fall back to get data directly
-					json = get_json(url, method, data)
+					#self.cache.set(data_key, json)
 				end
 			else
 				json = get_json(url, method, data)
